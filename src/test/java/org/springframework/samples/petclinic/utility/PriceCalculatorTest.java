@@ -57,6 +57,42 @@ public class PriceCalculatorTest {
 		Assert.assertEquals("The price does not match!", 24, actualTotalPrice, 0.01);
 	}
 
+	@Test
+	public void calcPriceTest2_second_path(){
+		// Arrange
+		PetType mockedPetType = mock(PetType.class);
+		Pet mockedPet0 = mock(Pet.class);
+		Pet mockedPet1 = mock(Pet.class);
+		Pet mockedPet2 = mock(Pet.class);
+		Pet mockedPet3 = mock(Pet.class);
+		Pet mockedPet4 = mock(Pet.class);
+		double givenBaseCharge = 1;
+		double givenBasePricePerPet = 20;
+		ArrayList<Visit> givenVisits = new ArrayList<Visit>();
+		when(mockedPet0.getVisitsUntilAge(1)).thenReturn(givenVisits);
+		when(mockedPet0.getBirthDate()).thenReturn(LocalDate.of(2021, 8, 22));
+		when(mockedPet1.getVisitsUntilAge(1)).thenReturn(givenVisits);
+		when(mockedPet1.getBirthDate()).thenReturn(LocalDate.of(2021, 8, 22));
+		when(mockedPet2.getVisitsUntilAge(1)).thenReturn(givenVisits);
+		when(mockedPet2.getBirthDate()).thenReturn(LocalDate.of(2021, 8, 22));
+		when(mockedPet3.getVisitsUntilAge(1)).thenReturn(givenVisits);
+		when(mockedPet3.getBirthDate()).thenReturn(LocalDate.of(2021, 8, 22));
+		when(mockedPet4.getVisitsUntilAge(1)).thenReturn(givenVisits);
+		when(mockedPet4.getBirthDate()).thenReturn(LocalDate.of(2021, 8, 22));
+		ArrayList<Pet> givenPets = new ArrayList<Pet>();
+		givenPets.add(mockedPet0);
+		givenPets.add(mockedPet1);
+		givenPets.add(mockedPet2);
+		givenPets.add(mockedPet3);
+		givenPets.add(mockedPet4);
+		PriceCalculator sut = new PriceCalculator();
+
+		// Act
+		double actualTotalPrice = sut.calcPrice(givenPets, givenBaseCharge, givenBasePricePerPet);
+
+		// Assert
+		Assert.assertEquals("The price does not match!", 337, actualTotalPrice, 0.01);
+	}
 /*	@Test
 	public void calcPriceTest_third_path(){
 		// Arrange
